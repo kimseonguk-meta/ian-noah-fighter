@@ -228,7 +228,7 @@ function drawHUD(){updSpecRing();for(const [o,x,flip] of [[P,18,0],[C,GW-318,1]]
  // timer
  ctx.fillStyle='#facc15';ctx.beginPath();ctx.arc(GW/2,34,27,0,7);ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=3;ctx.stroke();ctx.fillStyle='#111';ctx.font='1000 22px system-ui';ctx.textAlign='center';ctx.fillText(gameMode==='training'?'∞':Math.max(0,Math.ceil(timer)),GW/2,42);
  if(P&&P.combo>=2&&timeMs-P.comboT<1200){ctx.fillStyle='#facc15';ctx.font='1000 30px system-ui';ctx.textAlign='left';ctx.fillText(P.combo+' HITS!',26,110)}
- if(bigText&&timeMs<bigUntil){ctx.save();ctx.translate(GW/2,220);ctx.font='1000 64px system-ui';ctx.textAlign='center';ctx.lineWidth=10;ctx.strokeStyle='#dc2626';const s=Math.max(.72,Math.min(1.12,.7+(timeMs-(bigUntil-1000))/600));ctx.scale(s,s);ctx.strokeText(bigText,0,0);ctx.fillStyle='#facc15';ctx.fillText(bigText,0,0);ctx.restore()}}
+ if(bigText&&timeMs<bigUntil){ctx.save();ctx.translate(GW/2,220);const fs=bigText.length>8?46:68;ctx.font='1000 '+fs+'px system-ui';ctx.textAlign='center';ctx.lineWidth=10;ctx.strokeStyle='#dc2626';ctx.strokeText(bigText,0,0);ctx.fillStyle='#facc15';ctx.fillText(bigText,0,0);ctx.restore()}}
 /* ---------- Fighter ---------- */
 const DUR={punch:260,kick:340,jump_attack:300,hit:300,special_charge:280,special_fire:300,special_dash:340,ko:99999,guard:200};
 const NATDIR={ian:1,noah:-1};
@@ -244,7 +244,7 @@ function poseOf(o){const t=o.state;
  if(t==='jump_attack')return 'jump_attack';
  if(o.y<FLOOR)return o.vy<-3?'jump_rise':(o.vy>3?'jump_fall':'jump_apex');
  return t}
-function drawFighter(o){const im=IMG[o.c.id][poseOf(o)];if(!im||!im.complete)return;const h=232,w=h*im.width/im.height;
+function drawFighter(o){const im=IMG[o.c.id][poseOf(o)];if(!im||!im.complete)return;const h=232,w=Math.min(360,h*im.width/im.height);
  const hgt=Math.max(0,FLOOR-o.y);ctx.save();ctx.globalAlpha=Math.max(.1,.3-hgt/900);ctx.fillStyle='#000';ctx.beginPath();ctx.ellipse(o.x,FLOOR+12,52*(1-hgt/620),10,0,0,7);ctx.fill();ctx.restore();
  ctx.save();ctx.translate(o.x,o.y);if(o.face*(NATDIR[o.c.id]||1)<0)ctx.scale(-1,1);
  if(o.state==='hit'&&Math.floor(timeMs/50)%2===0)ctx.globalAlpha=.88;
