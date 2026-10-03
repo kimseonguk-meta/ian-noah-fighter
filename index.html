@@ -181,7 +181,7 @@ function setupArcadeStage(){const table=[['noah',1,1],['ian',1.08,1.04],['noah',
  if(base.id===P.c.id&&arcadeStage<8)base=CHARS.find(c=>c.id!==P.c.id);
  C.c=Object.assign({},base,{maxHp:Math.round(base.maxHp*t[1]),name:(arcadeStage===8?'챔피언 ':'')+base.name});
  C.hp=C.ghost=C.c.maxHp;C.atkMul=t[2];C.aiMul=Math.max(.5,1-(arcadeStage-1)*.09);C.gauge=arcadeStage===8?100:30;C.aiStyle=['calm','punch','kick','jumpy','guard','special','mix','champion'][Math.min(7,arcadeStage-1)]}
-function startRound(){for(const [o,x] of [[P,200],[C,760]]){o.hp=o.c.maxHp;o.ghost=o.c.maxHp;o.gauge=(o===P&&ITEMS.gauge)?100:30;o.x=x;o.y=FLOOR;o.vy=0;o.state='idle';o.st=0;o.combo=0}projectiles=[];particles=[];gems=[];dmgTexts=[];timer=60;timerAcc=0;bigText='ROUND '+roundNo;bigUntil=timeMs+1000;fightOn=false;setTimeout(()=>{bigText='FIGHT!';bigUntil=timeMs+700;snd(660,.18,'square',.14);fightOn=true},1050)}
+function startRound(){for(const [o,x] of [[P,200],[C,760]]){o.hp=o.c.maxHp;o.ghost=o.c.maxHp;o.gauge=(o===P&&ITEMS.gauge)?100:30;o.x=x;o.y=FLOOR;o.vy=0;o.state='idle';o.st=0;o.combo=0}projectiles=[];particles=[];gems=[];dmgTexts=[];timer=60;timerAcc=0;bigText=(gameMode==='arcade'?('STAGE '+arcadeStage+' · ROUND '+roundNo):(gameMode==='story'?('STAGE '+(storyStage+1)+' · ROUND '+roundNo):('ROUND '+roundNo)));bigUntil=timeMs+1000;fightOn=false;setTimeout(()=>{bigText='FIGHT!';bigUntil=timeMs+700;snd(660,.18,'square',.14);fightOn=true},1050)}
 function setState(o,s){o.state=s;o.st=0;o.hitDone=false}
 function atkHit(att,tgt,dmg,kb){if(tgt.state==='ko'||timeMs<tgt.invulnUntil)return;tgt.charging=false;
  // 저스트 가드: 가드 시작 직후 막으면 무피해 + 카운터 기회
