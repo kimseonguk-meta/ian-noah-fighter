@@ -267,7 +267,7 @@ function update(dt){if(mode!=='fight'||!P)return;timeMs+=dt;
   if(o.face===(o===P?1:-1)){} o.face=(o===P? (C.x>=o.x?1:-1):(P.x>=o.x?1:-1));
   if(o.dash){o.x=Math.max(70,Math.min(890,o.x+o.dash));particles.push({x:o.x-o.face*30,y:o.y-90,vx:-o.face*2,vy:0,g:0,life:.7,col:'#f97316',size:16,star:false});const foe=o===P?C:P;if(Math.abs(o.x-foe.x)<95&&Math.abs(o.y-foe.y)<110&&!o.hitDone){o.hitDone=true;atkHit(o,foe,o.dashDmg||14,12)}if(o.st>340)o.dash=0}
   if(o.y<FLOOR||o.vy<0){o.y+=o.vy;o.vy+=1.15;if(o.y>=FLOOR){o.y=FLOOR;o.vy=0;if(o.state==='jump_attack')setState(o,'idle')}}
-  const d=DUR[o.state];if(d&&o.st>d&&o.state!=='ko'){if(o.state==='hit')o.invulnUntil=timeMs+260;setState(o,'idle')}
+  const d=DUR[o.state];if(d&&o.st>d&&o.state!=='ko'){if(o.state==='hit')o.invulnUntil=timeMs+260;setState(o,'idle')}}
  // projectiles
  projectiles=projectiles.filter(p=>{p.x+=p.dir*7;particles.push({x:p.x,y:p.y,vx:-p.dir,vy:0,g:0,life:.5,col:'#38bdf8',size:8,star:false});
   if(Math.abs(p.x-p.foe.x)<62&&Math.abs(p.y-(p.foe.y-110))<95){atkHit(p.owner,p.foe,p.dmg||13,10);return false}return p.x>20&&p.x<940});
