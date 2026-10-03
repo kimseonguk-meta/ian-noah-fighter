@@ -176,7 +176,7 @@ function beginMatch(){const pc=selected;let cc=pc.id==='ian'?CHARS[1]:CHARS[0];P
  if(gameMode==='arcade'){arcadeStage=1;setupArcadeStage()}if(gameMode==='story'){C.atkMul=1+storyStage*.18;C.aiMul=1-storyStage*.12}P.atkMul=ITEMS.power?1.1:1;
  document.getElementById('selectUI').classList.add('hidden');document.getElementById('controls').classList.remove('hidden');document.getElementById('topBtns').style.display='flex';mode='fight';roundNo=1;snd(520,.1);
  bigText=pc.name+' VS '+C.c.name;bigUntil=timeMs+900;setTimeout(()=>startRound(),920)}
-function setupArcadeStage(){const table=[['noah',1,1],['ian',1.08,1.04],['noah',1.16,1.09],['ian',1.24,1.14],['noah',1.32,1.2],['ian',1.4,1.26],['noah',1.48,1.32],['ian',1.6,1.4]];
+function setupArcadeStage(){const table=[['noah',.78,.72],['ian',.88,.85],['noah',1,1],['ian',1.1,1.08],['noah',1.2,1.16],['ian',1.32,1.24],['noah',1.45,1.32],['ian',1.6,1.42]];
  const t=table[Math.min(arcadeStage-1,table.length-1)];let base=CHARS.find(c=>c.id===t[0]);
  if(base.id===P.c.id&&arcadeStage<8)base=CHARS.find(c=>c.id!==P.c.id);
  C.c=Object.assign({},base,{maxHp:Math.round(base.maxHp*t[1]),name:(arcadeStage===8?'챔피언 ':'')+base.name});
