@@ -274,8 +274,9 @@ function update(dt){if(mode!=='fight'||!P)return;timeMs+=dt;
  particles=particles.filter(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=p.g;p.life-=.03;return p.life>0});
  gems=gems.filter(gm=>{gm.x+=gm.vx;gm.y+=gm.vy;gm.vy+=gm.g;if(gm.y>FLOOR-6){gm.y=FLOOR-6;gm.vy*=-.45;gm.vx*=.7}gm.life-=.008;return gm.life>0});
  dmgTexts=dmgTexts.filter(d=>{d.y-=1.1;d.t++;return d.t<42});
- const mid=(P.x+C.x)/2;camX+=(Math.max(-30,Math.min(30,mid-480))-camX)*.06;if(shake>0)shake--}
  {const dx=C.x-P.x;if(Math.abs(dx)<74&&P.y>=FLOOR&&C.y>=FLOOR){const push=(74-Math.abs(dx))/2*(dx>=0?1:-1);P.x=Math.max(70,Math.min(890,P.x-push));C.x=Math.max(70,Math.min(890,C.x+push))}}
+ const mid=(P.x+C.x)/2;camX+=(Math.max(-30,Math.min(30,mid-480))-camX)*.06;if(shake>0)shake--}
+
 function timeUp(){fightOn=false;const loser=P.hp<=C.hp?P:C,winner=loser===P?C:P;loser.guard=false;loser.invulnUntil=0;bigText='TIME UP!';bigUntil=timeMs+900;setTimeout(()=>atkHit(winner,loser,9999,0),500)}function jumpF(o){if(o.y>=FLOOR){o.vy=-16.5;snd(430,.07,'sine',.07)}}
 let aiNext=0;
 function aiStep(){if(gameMode==='training')return;if(timeMs<aiNext)return;aiNext=timeMs+(300+Math.random()*300)*(C.aiMul||1);const d=C.x-P.x;C.guard=false;if(C.state==='guard')setState(C,'idle');
