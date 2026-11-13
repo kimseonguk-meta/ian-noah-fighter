@@ -11,11 +11,12 @@ canvas{display:block;width:100%;height:100%}
 @media (orientation:portrait){#rotate{display:flex}}
 /* Select */
 #selectUI{position:absolute;inset:0;display:flex;gap:10px;padding:12px;background:linear-gradient(135deg,#312e81,#7c2d12);z-index:10}
-#leftCol{flex:1.4;display:flex;flex-direction:column;min-width:0}
-#rightCol{flex:1;background:#fff;color:#111;border-radius:16px;padding:10px;display:flex;flex-direction:column;align-items:center;min-width:0}
+#leftCol{flex:1.4;display:flex;flex-direction:column;min-width:0;padding-top:34px}
+#rightCol{flex:1;background:#fff;color:#111;border-radius:16px;padding:10px;display:flex;flex-direction:column;align-items:center;min-width:0;overflow:hidden}
+#pvScroll{flex:1;min-height:0;width:100%;overflow-y:auto;display:flex;flex-direction:column;align-items:stretch;scrollbar-width:none}#pvScroll::-webkit-scrollbar{display:none}
 h1{margin:0;font-size:22px;letter-spacing:.5px}h1 span{color:#facc15}.sub{font-size:11px;color:#cbd5e1;margin:2px 0 8px}
-#grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;flex:1}
-.slot{background:#fff;border-radius:12px;border:3px solid transparent;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;align-items:center;padding:4px;color:#111}
+#grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,minmax(0,1fr));gap:8px;flex:1;min-height:0}
+.slot{background:#fff;border-radius:12px;border:3px solid transparent;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;align-items:center;padding:4px;color:#111;min-height:0}
 .slot.sel{border-color:#facc15;transform:scale(1.03)}
 .slot .th{flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(180deg,#e0f2fe,#fef3c7);border-radius:8px;min-height:0}
 .slot img{max-height:100%;max-width:92%;object-fit:contain}
@@ -37,8 +38,8 @@ h1{margin:0;font-size:22px;letter-spacing:.5px}h1 span{color:#facc15}.sub{font-s
 #storyBox .btns{display:flex;gap:8px;margin-top:10px}
 #storyBox button{flex:1;border:0;border-radius:9px;padding:9px;font-weight:900;cursor:pointer;background:#f59e0b;color:#fff}
 #storyBox button.skip{background:#e2e8f0;color:#334155}
-.statRow{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:800;color:#e0e7ff;margin-top:3px}
-.statRow .bar{flex:1;height:8px;background:rgba(255,255,255,.25);border-radius:4px;overflow:hidden}
+.statRow{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:800;color:#334155;margin-top:3px}
+.statRow .bar{flex:1;height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
 .statRow .bar i{display:block;height:100%;background:linear-gradient(90deg,#facc15,#f97316)}
 @keyframes pvIn{from{transform:scale(.75);opacity:0}to{transform:scale(1);opacity:1}}
 #pvImg img{animation:pvIn .35s ease}
@@ -50,9 +51,10 @@ h1{margin:0;font-size:22px;letter-spacing:.5px}h1 span{color:#facc15}.sub{font-s
 .modeBtn{flex:1;border:2px solid #e5e7eb;background:#f8fafc;border-radius:10px;padding:8px 2px;font-weight:900;font-size:12px;cursor:pointer;color:#334155}
 .modeBtn.sel{background:#312e81;color:#fff;border-color:#312e81}
 #recLine{font-size:11px;color:#e0e7ff;font-weight:800;margin-top:4px}
-#pvImg{flex:1;display:flex;align-items:flex-end;justify-content:center;min-height:0}#pvImg img{max-height:100%;max-width:90%;filter:drop-shadow(0 8px 6px rgba(0,0,0,.3))}
-#pvName{font-size:24px;font-weight:1000;margin:2px}#pvDesc{font-size:11px;color:#555;text-align:center;line-height:1.5;margin:0}
-#fightBtn{margin-top:8px;width:100%;border:0;border-radius:12px;padding:13px;font-size:18px;font-weight:1000;background:#facc15;box-shadow:0 5px 0 #a16207;cursor:pointer}
+#pvImg{flex:1;display:flex;align-items:flex-end;justify-content:center;min-height:80px}#pvImg img{max-height:100%;max-width:90%;filter:drop-shadow(0 8px 6px rgba(0,0,0,.3))}
+#pvName{font-size:24px;font-weight:1000;margin:2px;text-align:center}#pvDesc{font-size:11px;color:#555;text-align:center;line-height:1.5;margin:0}
+#fightBtn{margin-top:8px;width:100%;border:0;border-radius:12px;padding:13px;font-size:18px;font-weight:1000;background:#facc15;box-shadow:0 5px 0 #a16207;cursor:pointer;flex-shrink:0}
+@media (max-height:430px){#leftCol{padding-top:30px}#leftCol h1{font-size:18px}.sub{font-size:10px;margin:2px 0 6px}#pvName{font-size:20px}#pvDesc{font-size:10px}.modeBtn{padding:6px 2px;font-size:11px}#fightBtn{padding:10px;font-size:16px}.slot .nm{font-size:12px}#pvStats .statRow{font-size:10px}}
 /* Controls */
 #controls{position:absolute;inset:0;z-index:8;pointer-events:none}
 #joy{position:absolute;left:14px;bottom:14px;width:124px;height:124px;border-radius:50%;background:rgba(255,255,255,.13);border:2px solid rgba(255,255,255,.35);pointer-events:none;opacity:.35;transition:opacity .25s;z-index:3}
@@ -101,7 +103,7 @@ h1{margin:0;font-size:22px;letter-spacing:.5px}h1 span{color:#facc15}.sub{font-s
 <button class="menuBtn alt" id="mShop">🛒 Shop</button>
 <button class="menuBtn alt" id="mRec">📊 Records</button></div>
 <div id="selectUI" class="hidden"><button id="backBtn">← Menu</button><div id="leftCol"><h1>POCKET <span>CHIBI FIGHTER</span></h1><p class="sub">Landscape SD fighting · IAN vs NOAH · Pick your fighter</p><div id="grid"></div><div id="recLine"></div></div>
-<div id="rightCol"><div id="pvImg"></div><div id="pvName">IAN</div><p id="pvDesc"></p><div id="pvStats"></div><div id="modeRow"><button class="modeBtn sel" data-mode="vs">Versus</button><button class="modeBtn" data-mode="arcade">Arcade</button><button class="modeBtn" data-mode="training">Training</button></div><button id="fightBtn">▶ Start Fight</div></div>
+<div id="rightCol"><div id="pvScroll"><div id="pvImg"></div><div id="pvName">IAN</div><p id="pvDesc"></p><div id="pvStats"></div><div id="modeRow"><button class="modeBtn sel" data-mode="vs">Versus</button><button class="modeBtn" data-mode="arcade">Arcade</button><button class="modeBtn" data-mode="training">Training</button></div></div><button id="fightBtn">▶ Start Fight</button></div></div>
 <div id="storyUI" class="hidden"><div id="storyBox"><div class="who" id="storyWho"></div><div id="storyText"></div><div class="btns"><button class="skip" id="storySkip">SKIP</button><button id="storyNext">Next ▶</button></div></div></div>
 <div id="shopUI" class="panel hidden"><div class="panelCard"><h3>🛒 Shop <span style="float:right">🪙 <span id="coinShop">0</span></span></h3>
 <div class="row"><span>⚡ Start Gauge MAX<br><small>Full super gauge from the start of every round</small></span><button id="buyGauge" style="border:0;border-radius:8px;padding:8px 10px;font-weight:900;background:#f59e0b;color:#fff;cursor:pointer">300 Coins</button></div>
@@ -189,7 +191,7 @@ function buildGrid(){grid.innerHTML="";CHARS.forEach(c=>{const d=document.create
 function pv(){document.getElementById('pvName').textContent=selected.name;document.getElementById('pvDesc').textContent=selected.desc;document.getElementById('pvImg').innerHTML=`<img src="${SPRITES[selected.id].idle}">`;
  const atk=Math.round(selected.atk/1.2*100),def=Math.round(selected.maxHp/1.2),spd=Math.round(selected.spd/1.15*100),sp=selected.type==='flame'?'Special: Flaming Dash — ↓→ + Punch, or hold the Special button to charge (max Lv3)':'Special: Energy Bolt — ↓→ + Punch, or hold the Special button to charge (max Lv3)';
  const quote=({ian:'💬 "I\'ll protect the lunch coupons!" · Power fighter who loves his gi',noah:'💬 "Fast as fire, all the way!" · Dash fighter proud of his speed',eunjin:'💬 "Take Mom\'s Kikoken!" · Balanced fighter with flashy multi-kicks',seonguk:'💬 "Sonic Boom from Dad!" · Power fighter with one heavy hit'})[selected.id];
- document.getElementById('pvStats').innerHTML=`<div style="font-size:11px;color:#fff;font-weight:800;margin-bottom:4px">${quote}</div>`+[['ATK',atk],['DEF',def],['SPD',spd],['HP',selected.maxHp]].map(([k,v])=>`<div class="statRow"><span style="width:30px">${k}</span><div class="bar"><i style="width:${Math.min(100,v)}%"></i></div><span>${v}</span></div>`).join('')+`<div style="font-size:11px;color:#fde68a;font-weight:800;margin-top:5px">${sp}</div>`}
+ document.getElementById('pvStats').innerHTML=`<div style="font-size:11px;color:#334155;font-weight:800;margin-bottom:4px">${quote}</div>`+[['ATK',atk],['DEF',def],['SPD',spd],['HP',selected.maxHp]].map(([k,v])=>`<div class="statRow"><span style="width:30px">${k}</span><div class="bar"><i style="width:${Math.min(100,v)}%"></i></div><span>${v}</span></div>`).join('')+`<div style="font-size:11px;color:#b45309;font-weight:800;margin-top:5px">${sp}</div>`}
 buildGrid();pv();updRec();
 document.getElementById('selectUI').style.background=`linear-gradient(rgba(24,18,64,.58),rgba(24,18,64,.58)), url(${BGIMG.src}) center/cover`;
 document.getElementById('homeUI').style.background=`linear-gradient(rgba(24,18,64,.45),rgba(24,18,64,.65)), url(${BGIMG.src}) center/cover`;updCoins();
